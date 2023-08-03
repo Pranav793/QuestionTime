@@ -16,11 +16,13 @@ Including another URLconf
 """
 from pydoc import pathdirs
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from django_registration.backends.one_step.views import RegistrationView
 
 from users.forms import CustomUserForm
+
+from core.views import IndexTemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -35,6 +37,9 @@ urlpatterns = [
 
 
     path('api/v1/', include("questions.api.urls")),
+
+    # must be the last one
+    re_path(r"^.*$", IndexTemplateView.as_view(), name="spa-entry-point")
 ]
 
 
