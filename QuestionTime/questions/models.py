@@ -1,10 +1,10 @@
-from pyexpat import model
 from django.db import models
 from core.models import TimeStampedModel
 from django.conf import settings
 import uuid as uuid_lib
 
 class Question(TimeStampedModel):
+    uuid = models.UUIDField(default=uuid_lib.uuid4, editable=False)
     content = models.CharField(max_length=240)
     slug = models.SlugField(max_length=255, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="questions")

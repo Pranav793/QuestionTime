@@ -25,21 +25,41 @@ from users.forms import CustomUserForm
 from core.views import IndexTemplateView
 
 urlpatterns = [
+    # path("admin/", admin.site.urls),
+    # path("accounts/", include("django.contrib.auth.urls")),
+    # path('accounts/register/', RegistrationView.as_view(form_class=CustomUserForm, success_url='/'), name='django_registration_register'),
+    # path('accounts/', include('django_registration.backends.one_step.urls')),
+
+    # path("api-auth/", include("rest_framework.urls")),
+
+    # path('auth/', include('djoser.urls')),
+    # path('auth/', include('djoser.urls.authtoken')),
+
+
+    # path('api/v1/', include("questions.api.urls")),
+
+    # # must be the last one
+    # re_path(r"^.*$", IndexTemplateView.as_view(), name="spa-entry-point")
     path("admin/", admin.site.urls),
+
+    path(
+        "accounts/register/",
+        RegistrationView.as_view(
+            form_class=CustomUserForm,
+            success_url="/",
+        ),
+        name="django_registration_register",
+    ),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('accounts/register/', RegistrationView.as_view(form_class=CustomUserForm, success_url='/'), name='django_registration_register'),
-    path('accounts/', include('django_registration.backends.one_step.urls')),
 
     path("api-auth/", include("rest_framework.urls")),
 
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
 
+    path("api/v1/", include("questions.api.urls")),
 
-    path('api/v1/', include("questions.api.urls")),
-
-    # must be the last one
-    re_path(r"^.*$", IndexTemplateView.as_view(), name="spa-entry-point")
+    re_path(r"^.*$", IndexTemplateView.as_view(), name="entry-point"),
 ]
 
 
